@@ -11,7 +11,7 @@ FROM basesystem as webbase
 # Install packages
 RUN apk update \
     && apk upgrade \
-    && apk add --no-cache  curl nginx supervisor \
+    && apk add --no-cache curl nginx supervisor \
     php7 php7-common php7-iconv php7-json php7-gd \
     php7-curl php7-xml php7-pgsql php7-imap php7-cgi \
     fcgi php7-pdo php7-pdo_pgsql php7-soap \
@@ -19,8 +19,11 @@ RUN apk update \
     php7-gettext php7-ldap php7-ctype php7-dom \
     php7-fpm php7-pdo_pgsql php7-session php7-mysqli  \
     php7-mbstring php7-xml php7-gd php7-zlib php7-bz2 \
-    php7-zip php7-openssl php7-curl php7-opcache php7-json \
+    php7-zip php7-openssl php7-opcache php7-pdo_mysql \
+    php7-pdo_odbc php7-pecl-apcu \
     && rm -rf /var/cache/apk/*
+
+EXPOSE 9000
 
 # Configure nginx
 COPY config/nginx.conf /etc/nginx/nginx.conf
