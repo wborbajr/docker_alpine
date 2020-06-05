@@ -29,7 +29,8 @@ build-nc: ## Build the container without caching
 	docker build --no-cache -t $(APP_NAME) .
 
 run: ## Run container on port configured in `config.env`
-	docker container run -i -t -d --rm --env-file=./config.env -p=$(HOST_PORT):$(PORT) --name="$(APP_ALIAS)" $(APP_NAME)
+	docker container run -d --rm --env-file=./config.env -p=$(HOST_PORT):$(PORT) --name="$(APP_ALIAS)" $(APP_NAME)
+	# docker container run -i -t -d --rm --env-file=./config.env -p=$(HOST_PORT):$(PORT) --name="$(APP_ALIAS)" $(APP_NAME)
 
 stop: ## Stop and remove a running container
 	docker container stop $(APP_NAME); docker rm -f $(APP_NAME); docker rmi -f $(APP_NAME)
