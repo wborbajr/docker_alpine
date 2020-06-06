@@ -29,25 +29,14 @@ build-nc: ## Build the container without caching
 	docker build --no-cache -t $(APP_NAME) .
 
 run: ## Run container on port configured in `config.env`
-	docker container run -i -t -d --rm --env-file=./config.env -p=$(HOST_PORT):$(PORT) --name="$(APP_ALIAS)" $(APP_NAME)
-	# docker container run -d --rm --env-file=./config.env -p=$(HOST_PORT):$(PORT) --name="$(APP_ALIAS)" $(APP_NAME)
+	docker container run -itd --rm -v $(pwd)/src:/var/www/html --env-file=./config.env -p=$(HOST_PORT):$(PORT) --name="$(APP_ALIAS)" $(APP_NAME)
 
 stop: ## Stop and remove a running container
 	docker container stop $(APP_ALIAS) 
 	## ; docker rm -f $(APP_ALIAS); docker rmi -f $(APP_ALIAS)
 
 kill: ## be careful be aware 
-	#stop all containers:
-	docker container ps -a -q | xargs docker container stop;
-
-	#stop all containers by force
-	docker container ps -q | xargs docker container kill;
-
-	#remove all containers
-	docker container ps -a -q | xargs docker container rm;
-
-	#remove all docker images
-	docker images -q | xargs docker rmi -f;
+	./apocalipse.sh
 
 ps:
 	docker ps -la
