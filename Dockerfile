@@ -111,7 +111,8 @@ USER nobody
 # Add application
 # Set Workdir
 WORKDIR /var/www/html
-COPY --chown=nobody src/ /var/www/html/
+ADD src/ /var/www/html/
+#COPY --chown=nobody src/ /var/www/html/
 
 # Expose volumes
 VOLUME ["/var/www/html"]

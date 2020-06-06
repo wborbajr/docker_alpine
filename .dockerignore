@@ -1,7 +1,5 @@
-node_modules
 Dockerfile
 .dockerignore
-config
 config.env
 deploy.env
 LICENSE
