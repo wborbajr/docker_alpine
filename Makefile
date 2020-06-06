@@ -49,6 +49,12 @@ kill: ## be careful be aware
 	#remove all docker images
 	docker images -q | xargs docker rmi -f;
 
+ps:
+	docker ps -la
+
+log:
+	docker logs -f $(APP_ALIAS) 
+	
 ############################
 # docker-compose
 ############################
