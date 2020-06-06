@@ -29,7 +29,7 @@ build-nc: ## Build the container without caching
 	docker build --no-cache -t $(APP_NAME) .
 
 run: ## Run container on port configured in `config.env`
-	docker container run -itd --rm -v $(pwd)/src:/var/www/html --env-file=./config.env -p=$(HOST_PORT):$(PORT) --name="$(APP_ALIAS)" $(APP_NAME)
+	docker container run -itd --rm -v src:/var/www/html --env-file=./config.env -p=$(HOST_PORT):$(PORT) --name="$(APP_ALIAS)" $(APP_NAME)
 
 stop: ## Stop and remove a running container
 	docker container stop $(APP_ALIAS) 
